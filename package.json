@@ -7,5 +7,24 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.9"
-  }
+  },
+  "name": "finalproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abdirashidexe/finalProject301.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abdirashidexe/finalProject301/issues"
+  },
+  "homepage": "https://github.com/abdirashidexe/finalProject301#readme"
 }
