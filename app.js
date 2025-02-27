@@ -18,10 +18,10 @@ const pool = mariadb.createPool({
 async function connect() {
     try {
         const conn = await pool.getConnection();
-        console.log('Connected to the database!')
+        console.log('Connected to the database!');
         return conn;
     } catch (err) {
-        console.log(`Error connecting to the database ${err}`)
+        console.log(`Error connecting to the database ${err}`);
     }
 }
 
@@ -40,12 +40,23 @@ app.get('/', (req, res) => {
 });
 
 app.get('/admin', async (req, res) => {
-
     const conn = await connect();
     const orders = await conn.query('SELECT * FROM orders')
-    console.log(orders);
+    res.render('admin', { orders });
+});
 
-    // res.render('order-summary', { orders });
+app.get('/confirmed', (req, res) => {
+    res.render('confirmed');
+});
+
+app.get('/Advanced_Filters', (req, res) => {
+    res.render('filters');
+});
+
+app.get('/cart', async (req, res) => {
+    const conn = await connect();
+    const shoppingCart = await conn.query('SELECT * FROM orders');
+    res.render('cart', { shoppingCart});
 });
 
 //Tell the server to listen on our specified port
