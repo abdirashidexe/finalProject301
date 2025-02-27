@@ -25,84 +25,27 @@ async function connect() {
     }
 }
 
-//Instantiate an Express application
 const app = express();
 
-//Middleware to parse form data
 app.use(express.urlencoded({ extended: true }));
 
-//Set the view engine for our application
 app.set('view engine', 'ejs');
 
-//Serve static files from the 'public' directory
 app.use(express.static('public'));
 
-//Define a port number for our server to listen on
 const PORT = process.env.APP_PORT || 3000;
 
-//Define a "default" route for our home page
 app.get('/', (req, res) => {
-
-    // Send our home page as a response to the client
     res.render('home');
 });
 
-//Define an admin route
 app.get('/admin', async (req, res) => {
 
-    //Connect to the database
     const conn = await connect();
-
-    //Query the database
     const orders = await conn.query('SELECT * FROM orders')
-
     console.log(orders);
 
-    res.render('order-summary', { orders });
-});
-
-//Define a "thank you" route
-app.post('/thankyou', async (req, res) => {
-
-    const order = {
-        fname: req.body.fname,
-        lname: req.body.lname,
-        email: req.body.email,
-        method: req.body.method,
-        toppings: req.body.toppings,
-        size: req.body.size
-    };
-
-    const result = validateForm(order);
-    if (!result.isValid) {
-        console.log(result.errors);
-        res.send(result.errors);
-        return;
-    }
-
-    //Connect to the database
-    const conn = await connect();
-
-    //Convert toppings to a string
-    if (order.toppings) {
-        if (Array.isArray(order.toppings)) {
-            order.toppings = order.toppings.join(",");
-        }
-    } else {
-        order.toppings = "";
-    }
-
-    // Add the order to our database
-    const insertQuery = await conn.query(`insert into orders 
-        (fname, lname, email, size, method, toppings)
-        values (?, ?, ?, ?, ?, ?)`,
-        [ order.fname, order.lname, order.email, order.size, 
-        order.method, order.toppings ]);
-
-    // INSERT INTO tbl (field1, field2) VALUES (?, ?)
-    
-
-    res.render('thankyou', { order });
+    // res.render('order-summary', { orders });
 });
 
 //Tell the server to listen on our specified port
