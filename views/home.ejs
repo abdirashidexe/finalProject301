@@ -4,8 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="styles\styles.css">
 </head>
 <body>
-    <h1>the home page</h1>
+    <div id="main">
+        <header>
+            <img src="images/logo.jpg" alt="Picture of PC">
+            <h1>PCPickr</h1>
+            <p>Pick out your dream pc!</p>
+            <hr>
+        </header>
+
+        <form action="thankyou" method="post">
+            <fieldset>
+                <legend>Case</legend>
+
+                <select name="size" id="size">
+                    <option value="none">-- Select a Case --</option>
+                    <option value="small">Case 1</option>
+                    <option value="med">Case 2</option>
+                    <option value="large">Case 3</option>
+                </select>
+            </fieldset>
+
+            <fieldset>
+                <legend>GPU</legend>
+
+                <select name="size" id="size">
+                    <option value="none">-- Select a GPU --</option>
+                    <option value="small">GPU 1</option>
+                    <option value="med">GPU 2</option>
+                    <option value="large">GPU 3</option>
+                </select>
+            </fieldset>
+
+            <fieldset>
+                <legend>CPU</legend>
+
+                <select name="size" id="size">
+                    <option value="none">-- Select a Case --</option>
+                    <option value="small">CPU 1</option>
+                    <option value="med">CPU 2</option>
+                    <option value="large">CPU 3</option>
+                </select>
+            </fieldset>
+
+            <!-- Place order button -->
+            <button type="submit">Submit</button>
+            <hr>
+            <a id="contact-button" href="#" role="button">Contact Us</a>
+        </form>
+    </div>
+
 </body>
 </html>
