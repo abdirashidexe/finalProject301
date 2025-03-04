@@ -51,7 +51,7 @@ app.get('/confirmed', (req, res) => {
 
 app.get('/Advanced_Filters', (req, res) => {
     res.render('filters');
-});
+}); 
 
 app.get('/cart', async (req, res) => {
     const conn = await connect();
