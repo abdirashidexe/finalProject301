@@ -4,23 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="styles\styles.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" id="modalCSS" href="styles/modal.css">
 </head>
 
 <body>
-
     <header>
-        <img src="images/logo.jpg" alt="Picture of PC">
-        <h1>PCPickr</h1>
-        <p>Pick out your dream pc!</p>
-        <hr>
+        <section class = "browsingAs">
+
+            <p>Browsing as: GuestTEMP</p> 
+
+        </section>
+
+        <section class = "login">
+            <!-- Trigger/Open The Modal -->
+            <button id="myBtn">login</button>
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+                <!-- Modal content -->
+                <form action = "loginUser" method = "post">
+                    <div class="modal-content">
+                        <!-- close button -->
+                        <span class="close">&times;</span>
+    
+                        <!-- actual form -->
+                        <label><b>Username</b></label>
+                        <input type="text" placeholder="Enter Username" name="userName" required>
+                
+                        <label><b>Password</b></label>
+                        <input type="passWord" placeholder="Enter Password" name="passWord" required>
+                
+                        <button type="submit">Login</button>
+                        <label>
+                    </div>
+                </form>
+            </div>
+        </section>
     </header>
 
     <main>
+
+        <section class = "cosmetic">
+            <img src="images/logo.jpg" alt="Picture of PC">
+            <h1>PCPickr</h1>
+            <p>Pick out your dream pc!</p>
+            <hr>    
+        </section>
+
         <form action="thankyou" method="post">
             <fieldset>
                 <legend>Case</legend>
-
                 <select name="size" id="size">
                     <option value="none">-- Select a Case --</option>
                     <option value="small">Case 1</option>
@@ -57,5 +90,6 @@
             <a id="contact-button" href="#" role="button">Contact Us</a>
         </form>
     </main>
+    <script src="scripts/login.js" defer></script>
 </body>
 </html>

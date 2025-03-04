@@ -39,6 +39,10 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
+app.post('/loginUser', (req, res) => {
+    res.render('home');
+});
+
 app.get('/admin', async (req, res) => {
     const conn = await connect();
     const orders = await conn.query('SELECT * FROM orders')
