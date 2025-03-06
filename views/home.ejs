@@ -1,49 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PCPickr</title>
-    <link rel="stylesheet" href="styles/styles.css">
-    <link rel="stylesheet" id="modalCSS" href="styles/modal.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PCPickr</title>
+        <link rel="stylesheet" href="styles/styles.css">
+        <link rel="stylesheet" href="styles/layout.css">
+        <link rel="stylesheet" id="modalCSS" href="styles/modal.css">
+    </head>
 
-<body>
-    <header>
-        <section class = "cosmetic">
+    <div class = "container">
+        <body>
+            <header>
+                <section class = "cosmetic">
 
-            <!-- we should make this section a single image so that we dont need multiple html elements. -->
-            <img src="images/logo.jpg" alt="Picture of PC">
-            <h1>PCPickr</h1>
-        </section>
+                    <!-- we should make this section a single image so that we dont need multiple html elements. -->
+                    <img src="images/logo.jpg" alt="Picture of PC">
+                    <h1>PCPickr</h1>
+                </section>
 
-        <section class = "login">
-            <p>Browsing as: GuestTEMP</p> 
-            <!-- Trigger/Open The Modal -->
-            <button id="myBtn">login</button>
-            <!-- The Modal -->
-            <div id="myModal" class="modal">
-                <!-- Modal content -->
-                <form action = "loginUser" method = "post">
-                    <div class="modal-content">
-                        <!-- close button -->
-                        <span class="close">&times;</span>
-    
-                        <!-- actual form -->
-                        <label><b>Username</b></label>
-                        <input type="text" placeholder="Enter Username" name="userName" required>
-                
-                        <label><b>Password</b></label>
-                        <input type="passWord" placeholder="Enter Password" name="passWord" required>
-                
-                        <button type="submit">Login</button>
-                        <label>
+                <section class = "login">
+                    <p>Browsing as: GuestTEMP</p> 
+                    <!-- Trigger/Open The Modal -->
+                    <button id="myBtn">login</button>
+                    <!-- The Modal -->
+                    <div id="myModal" class="modal">
+                        <!-- Modal content -->
+                        <form action = "loginUser" method = "post">
+                            <div class="modal-content">
+                                <!-- close button -->
+                                <span class="close">&times;</span>
+            
+                                <!-- actual form -->
+                                <label><b>Username</b></label>
+                                <input type="text" placeholder="Enter Username" name="userName" required>
+                        
+                                <label><b>Password</b></label>
+                                <input type="passWord" placeholder="Enter Password" name="passWord" required>
+                        
+                                <button type="submit">Login</button>
+                                <label>
+                            </div>
+                        </form>
                     </div>
-                </form>
-            </div>
-        </section>
-    </header>
+                </section>
+            </header>
 
+            <main>
+                <form action="thankyou" method="post">
+                    <fieldset>
+                        <legend>Case</legend>
+                        <select name="case" id="case">
+                            <option value="none">Select a Case</option>
+                            <option value="case-1">Case 1</option>
+                            <option value="case-2">Case 2</option>
+                            <option value="case-3">Case 3</option>
+                        </select>
+                    </fieldset>
     <main>
         <form action="thankyou" method="post">
 
@@ -70,83 +83,97 @@
                 </select>
             </fieldset>
 
-            <fieldset>
-                <legend>Motherboard</legend>
-                <select name="motherboard" id="motherboard">
-                    <option value="none">Select a Motherboard</option>
-                    <option value="mb-1">Motherboard 1</option>
-                    <option value="mb-2">Motherboard 2</option>
-                    <option value="mb-3">Motherboard 3</option>
-                </select>
-            </fieldset>
+                    <fieldset>
+                        <legend>Motherboard</legend>
+                        <select name="motherboard" id="motherboard">
+                            <option value="none">Select a Motherboard</option>
+                            <option value="mb-1">Motherboard 1</option>
+                            <option value="mb-2">Motherboard 2</option>
+                            <option value="mb-3">Motherboard 3</option>
+                        </select>
+                    </fieldset>
 
-            <fieldset>
-                <legend>CPU</legend>
+                    <fieldset>
+                        <legend>CPU</legend>
 
-                <select name="cpu" id="cpu">
-                    <option value="none">Select a CPU</option>
-                    <option value="cpu-1">CPU 1</option>
-                    <option value="cpu-2">CPU 2</option>
-                    <option value="cpu-3">CPU 3</option>
-                </select>
-            </fieldset>
+                        <select name="cpu" id="cpu">
+                            <option value="none">Select a CPU</option>
+                            <option value="cpu-1">CPU 1</option>
+                            <option value="cpu-2">CPU 2</option>
+                            <option value="cpu-3">CPU 3</option>
+                        </select>
+                    </fieldset>
 
-            <fieldset>
-                <legend>GPU</legend>
-                <select name="gpu" id="gpu">
-                    <option value="none">Select a GPU</option>
-                    <option value="gpu-1">GPU 1</option>
-                    <option value="gpu-2">GPU 2</option>
-                    <option value="gpu-3">GPU 3</option>
-                </select>
-            </fieldset>
+                    <fieldset>
+                        <legend>GPU</legend>
+                        <select name="gpu" id="gpu">
+                            <option value="none">Select a GPU</option>
+                            <option value="gpu-1">GPU 1</option>
+                            <option value="gpu-2">GPU 2</option>
+                            <option value="gpu-3">GPU 3</option>
+                        </select>
+                    </fieldset>
 
-            <fieldset>
-                <legend>RAM (Memory)</legend>
-                <select name="ram" id="ram">
-                    <option value="none">Select a GPU</option>
-                    <option value="ram-1">RAM 1</option>
-                    <option value="ram-2">RAM 2</option>
-                    <option value="ram-3">RAM 3</option>
-                </select>
-            </fieldset>
+                    <fieldset>
+                        <legend>RAM (Memory)</legend>
+                        <select name="ram" id="ram">
+                            <option value="none">Select a GPU</option>
+                            <option value="ram-1">RAM 1</option>
+                            <option value="ram-2">RAM 2</option>
+                            <option value="ram-3">RAM 3</option>
+                        </select>
+                    </fieldset>
 
-            <fieldset>
-                <legend>Storage (SSD/HDD)</legend>
-                <select name="storage" id="storage">
-                    <option value="none">Select a Storage</option>
-                    <option value="storage-1">Storage 1</option>
-                    <option value="storage-2">Storage 2</option>
-                    <option value="storage-3">Storage 3</option>
-                </select>
-            </fieldset>
+                    <fieldset>
+                        <legend>Storage (SSD/HDD)</legend>
+                        <select name="storage" id="storage">
+                            <option value="none">Select a Storage</option>
+                            <option value="storage-1">Storage 1</option>
+                            <option value="storage-2">Storage 2</option>
+                            <option value="storage-3">Storage 3</option>
+                        </select>
+                    </fieldset>
 
-            <fieldset>
-                <legend>Power Supply (PSU)</legend>
-                <select name="psu" id="psu">
-                    <option value="none">Select a PSU</option>
-                    <option value="psu-1">PSU 1</option>
-                    <option value="psu-2">PSU 2</option>
-                    <option value="psu-3">PSU 3</option>
-                </select>
-            </fieldset>
+                    <fieldset>
+                        <legend>Power Supply (PSU)</legend>
+                        <select name="psu" id="psu">
+                            <option value="none">Select a PSU</option>
+                            <option value="psu-1">PSU 1</option>
+                            <option value="psu-2">PSU 2</option>
+                            <option value="psu-3">PSU 3</option>
+                        </select>
+                    </fieldset>
 
-            <fieldset>
-                <legend>System Fan / Cooler</legend>
-                <select name="cooling" id="cooling">
-                    <option value="none">Select a Cooling</option>
-                    <option value="cooling-1">Cooling 1</option>
-                    <option value="cooling-2">Cooling 2</option>
-                    <option value="cooling-3">Cooling 3</option>
-                </select>
-            </fieldset>
+                    <fieldset>
+                        <legend>System Fan / Cooler</legend>
+                        <select name="cooling" id="cooling">
+                            <option value="none">Select a Cooling</option>
+                            <option value="cooling-1">Cooling 1</option>
+                            <option value="cooling-2">Cooling 2</option>
+                            <option value="cooling-3">Cooling 3</option>
+                        </select>
+                    </fieldset>
+                
 
-            <!-- Place order button -->
-            <button type="submit">Submit</button>
-            <hr>
-            <a id="contact-button" href="#" role="button">Contact Us</a>
-        </form>
-    </main>
-    <script src="scripts/login.js" defer></script>
-</body>
+                    <!-- Place order button -->
+                    <button type="submit">Submit</button>
+                    <hr>
+                </form>
+            </main>
+
+                <aside>
+                    <h2>Learning Resources</h2>
+                    <ul>
+                        <li><a href="#">MDN Web Docs</a></li>
+                        <li><a href="#">freeCodeCamp</a></li>
+                        <li><a href="#">Codecademy</a></li>
+                        <li><a href="#">W3Schools</a></li>
+                    </ul>
+                </aside>
+                <footer>
+                    <a id="contact-button" href="#" role="button">Contact Us</a>
+                </footer>
+            <script src="scripts/login.js" defer></script>
+        </body>
+    </div>
 </html>
