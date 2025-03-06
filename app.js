@@ -45,7 +45,7 @@ app.post('/loginUser', (req, res) => {
 
 app.get('/admin', async (req, res) => {
     const conn = await connect();
-    const orders = await conn.query('SELECT * FROM orders')
+    const orders = await conn.query('SELECT * FROM shopping_cart');
     res.render('admin', { orders });
 });
 
@@ -59,7 +59,7 @@ app.get('/Advanced_Filters', (req, res) => {
 
 app.get('/cart', async (req, res) => {
     const conn = await connect();
-    const shoppingCart = await conn.query('SELECT * FROM orders');
+    const shoppingCart = await conn.query('SELECT * FROM shopping_cart');
     res.render('cart', { shoppingCart});
 });
 
