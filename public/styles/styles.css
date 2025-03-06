@@ -1,3 +1,4 @@
+/* Default (mobile) */
 body
 {
     font-family: Arial, Helvetica, sans-serif;
@@ -12,4 +13,44 @@ header{
 img
 {
     width:10%;
+}
+
+fieldset, select
+{
+    border: 2px solid rgb(193, 193, 255);
+    border-radius: 10px;
+}
+
+fieldset
+{
+    margin-bottom: 15px;
+    margin-top:15px;
+}
+
+select
+{
+    padding:2px;
+}
+
+hr
+{
+    border: 2px solid rgb(193, 169, 144);
+    border-radius: 5px;
+}
+
+button
+{
+    background-color: rgb(64, 117, 142);
+    border-radius: 5px;
+    color: white;
+    margin:10px;
+}
+
+/* Large screens */
+@media (min-width: 768px)
+{
+    img
+    {
+        width:5%; /* Example: only change this for larger screen, everything else is default (moble) style*/
+    }
 }
