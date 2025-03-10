@@ -1,7 +1,21 @@
 
 /* mobile */
 @media screen and (max-width: 480px) {
+    aside{
+        display: none;
+    }
 
+    .container div {
+        display: grid;
+        margin: 0 auto;
+        padding: 20px;
+        grid-template-columns: 1fr;
+        grid-gap: 15px;
+        grid-template-areas:
+          "head head"
+          "main main"
+          "foot foot";
+      }
 }
 
 /* Tablet */

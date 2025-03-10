@@ -23,6 +23,7 @@ DROP TABLE IF EXISTS users;
 create table users(
 	id int(5) auto_increment primary key,
     user_password varchar(255),
+    filters varchar(255),
     username varchar(255), 
     account_created datetime default now()
 );

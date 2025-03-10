@@ -6,7 +6,8 @@
         <title>PCPickr</title>
         <link rel="stylesheet" href="styles/styles.css">
         <link rel="stylesheet" href="styles/layout.css">
-        <link rel="stylesheet" id="modalCSS" href="styles/modal.css">
+        <link rel="stylesheet" href="styles/modal.css">
+        <link rel="stylesheet" href="styles/collapsible.css">
     </head>
 
     <div class = "container">
@@ -22,7 +23,7 @@
                 <section class = "login">
                     <p>Browsing as: GuestTEMP</p> 
                     <!-- Trigger/Open The Modal -->
-                    <button id="myBtn">login</button>
+                    <button id="myBtn" class = "loginButton">login</button>
                     <!-- The Modal -->
                     <div id="myModal" class="modal">
                         <!-- Modal content -->
@@ -38,7 +39,7 @@
                                 <label><b>Password</b></label>
                                 <input type="passWord" placeholder="Enter Password" name="passWord" required>
                         
-                                <button type="submit" id>Login</button>
+                                <button type="submit" class ="loginButton">Login</button>
                                 <label>
                             </div>
                         </form>
@@ -47,7 +48,7 @@
             </header>
 
         <main>
-
+            
             <div class="items">
                 <div class="itemPic">
                     <img src="images/case_example.jpg" alt="A PC case">
@@ -85,24 +86,91 @@
 
                     <!-- Place order button -->
                     <form action="thankyou" method="post">
-                        <button type="submit" id = "buildButton">Build</button>
+                        <button type="submit" class = "buildButton">Build</button>
                     </form>
                 <hr>
             </main>
 
                 <aside>
-                    <h2>Learning Resources</h2>
-                    <ul>
-                        <li><a href="#">MDN Web Docs</a></li>
-                        <li><a href="#">freeCodeCamp</a></li>
-                        <li><a href="#">Codecademy</a></li>
-                        <li><a href="#">W3Schools</a></li>
-                    </ul>
+                    <h2>Advanced Filters</h2>
+                    <button class="collapsible">Component</button>
+                    <div class="content">
+                        <ul>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="component" value="CPU">CPU
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="component" value="GPU">GPU
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="component" value="motherboard">Motherboard
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="component" value="memory">Memory
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="component" value="ram">RAM
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="component" value="Case">Case
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                    <button class="collapsible">Manufactorer</button>
+                    <div class="content">
+                        <ul>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="component" value="10">Intel
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="component" value="11">AMD
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="component" value="12">Nvidia
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="component" value="13">NZXT
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="component" value="14">HYTE
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="component" value="15">Coolermaster
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
                 </aside>
+
                 <footer>
                     <a id="contact-button" href="#" role="button">Contact Us</a>
                 </footer>
+
             <script src="scripts/login.js" defer></script>
+            <script src="scripts/collapsible.js" defer></script>
         </body>
     </div>
 </html>

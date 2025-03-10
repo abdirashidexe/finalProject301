@@ -9,5 +9,14 @@
 </head>
 <body>
     <h1>Admin Page</h1>
+    <% if (orders.length == 0) {%>
+        <div>No posts!</div>
+    <% } %>
+
+    <% for (let i = 0; i < orders.length; i++) { %>
+        <section class = "entry">
+        <div><%= orders[i].products_selected %></div>
+        </section>
+    <% } %>
 </body>
 </html>
