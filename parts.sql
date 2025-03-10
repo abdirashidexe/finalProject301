@@ -8,7 +8,8 @@ create table parts(
     part_name varchar(255), 
     content varchar(255),
     price varchar(255),
-    release_date datetime default now()
+    release_date datetime default now(),
+    img_url varchar(255)
 );
 
 DROP TABLE IF EXISTS manufacturer;
@@ -34,32 +35,32 @@ create table shopping_cart(
     products_selected varchar(255)
 );
 
-insert into parts (id, manufacturer_id, component_type, part_name, content, price)
-values ('324', '10', 'CPU', 'INTEL Core i7 6700k', 'Old CPU that is outdated.', '150');
+insert into parts (id, manufacturer_id, component_type, part_name, content, price, img_url)
+values ('324', '10', 'CPU', 'INTEL Core i7 6700k', 'Old CPU that is outdated.', '150', 'public', '/images/6700k.png');
 
-insert into parts (manufacturer_id, component_type, part_name, content, price)
-values ('15', 'Case', 'Cooler Master MasterBox Q300L MicroATX Mini Tower Case', 'A great, small and cheap case with a tinted side panel and space for a large GPU.', '39.99');
+insert into parts (manufacturer_id, component_type, part_name, content, price, img_url)
+values ('15', 'Case', 'Cooler Master MasterBox Q300L MicroATX Mini Tower Case', 'A great, small and cheap case with a tinted side panel and space for a large GPU.', '39.99', '/images/Q300L.jpg');
 
-insert into parts (manufacturer_id, component_type, part_name, content, price)
-values ('10', 'CPU', 'INTEL Core i7 7700k', 'Old CPU that is outdated.', '160');
+insert into parts (manufacturer_id, component_type, part_name, content, price, img_url)
+values ('10', 'CPU', 'INTEL Core i7 7700k', 'Old CPU that is outdated.', '160', '/images/7700k.png');
 
-insert into parts (manufacturer_id, component_type, part_name, content, price)
-values ('11', 'CPU', 'AMD Ryzen 9800', 'New CPU that is nice.', '300');
+insert into parts (manufacturer_id, component_type, part_name, content, price, img_url)
+values ('11', 'CPU', 'AMD Ryzen 9800', 'New CPU that is nice.', '300', '/images/ryzen9800.png');
 
-insert into parts (manufacturer_id, component_type, part_name, content, price)
-values ('14', 'Case', 'Y70 Touch Infinite ATX Mid Tower Case', 'Digital Display.', '379.99');
+insert into parts (manufacturer_id, component_type, part_name, content, price, img_url)
+values ('14', 'Case', 'Y70 Touch Infinite ATX Mid Tower Case', 'Digital Display.', '379.99', '/images/Y70ATX.jpg');
 
-insert into parts (manufacturer_id, component_type, part_name, content, price)
-values ('12', 'GPU', 'GTX 980TI', 'Old but reliable graphics card', '150');
+insert into parts (manufacturer_id, component_type, part_name, content, price, img_url)
+values ('12', 'GPU', 'GTX 980TI', 'Old but reliable graphics card', '150', '/images/980ti.png');
 
-insert into parts (manufacturer_id, component_type, part_name, content, price)
-values ('12', 'GPU', 'GTX 1080TI', 'Old but reliable graphics card', '200');
+insert into parts (manufacturer_id, component_type, part_name, content, price, img_url)
+values ('12', 'GPU', 'GTX 1080TI', 'Old but reliable graphics card', '200', '/images/1080ti.jpg');
 
-insert into parts (manufacturer_id, component_type, part_name, content, price)
-values ('12', 'GPU', 'GTX 2080TI', 'Old but reliable graphics card', '200');
+insert into parts (manufacturer_id, component_type, part_name, content, price, img_url)
+values ('12', 'GPU', 'GTX 2080TI', 'Old but reliable graphics card', '200', '/images/2080ti.png');
 
-insert into parts (manufacturer_id, component_type, part_name, content, price)
-values ('13', 'Case', 'H9 Flow ATX Mid Tower Case', 'Big case with good airflow.', '154.49');
+insert into parts (manufacturer_id, component_type, part_name, content, price, img_url)
+values ('13', 'Case', 'H9 Flow ATX Mid Tower Case', 'Big case with good airflow.', '154.49', '/images/H9Flow.png');
 
 
 /* Manufacturers */
