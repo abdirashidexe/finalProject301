@@ -1,11 +1,11 @@
 import express from "express";
 import mariadb from "mariadb";
-import { validateForm } from "./services/validation.js";
+import session from "express-session";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-//Define our database credentials
+// Define our database credentials
 const pool = mariadb.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -14,7 +14,7 @@ const pool = mariadb.createPool({
   port: process.env.DB_PORT,
 });
 
-//Define function to connect to the DB
+// Define function to connect to the DB
 async function connect() {
   try {
     const conn = await pool.getConnection();
@@ -29,8 +29,16 @@ const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 
-app.set("view engine", "ejs");
+// Set up login stuff
+app.use(
+  session({
+    secret: "your_secret_key",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
+app.set("view engine", "ejs");
 app.use(express.static("public"));
 
 const PORT = process.env.APP_PORT || 3000;
@@ -38,11 +46,37 @@ const PORT = process.env.APP_PORT || 3000;
 app.get("/", async (req, res) => {
   const conn = await connect();
   const parts = await conn.query("SELECT * FROM parts");
-  res.render("home", { parts });
+  res.render("home", { parts, login: req.session.user || {}, error: null });
 });
 
-app.post("/loginUser", (req, res) => {
-  res.render("home");
+app.post("/login", async (req, res) => {
+  const { userName, passWord } = req.body;
+  const conn = await connect();
+  const userQuery =
+    "SELECT * FROM users WHERE username = ? AND user_password = ?";
+  const users = await conn.query(userQuery, [userName, passWord]);
+
+  // just nuke the session.
+  app.post("/logout", (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        return res.status(500).send("Error logging out");
+      }
+      res.redirect("/");
+    });
+  });
+
+  if (users.length > 0) {
+    req.session.user = users[0];
+    res.redirect("/");
+  } else {
+    const parts = await conn.query("SELECT * FROM parts");
+    res.render("home", {
+      parts,
+      login: {},
+      error: "Invalid username or password",
+    });
+  }
 });
 
 app.get("/admin", async (req, res) => {
@@ -65,7 +99,7 @@ app.get("/cart", async (req, res) => {
   res.render("cart", { shoppingCart });
 });
 
-//Tell the server to listen on our specified port
+// Tell the server to listen on our specified port
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });

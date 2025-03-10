@@ -85,7 +85,7 @@ values ('14', 'HYTE', '3824 Cedar Springs Road, Suite 430 Dallas, TX 75219');
 
 /* users */
 insert into users (id, username, user_password)
-values ('00001', 'Admin', 'TestPassword');
+values ('1', 'Not Logged In', 'TestPassword1');
 
 insert into users (username, user_password)
 values ('Admin2', 'TestPassword2');

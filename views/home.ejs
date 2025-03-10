@@ -14,36 +14,47 @@
         <body>
             <header>
                 <section class = "cosmetic">
-
                     <!-- we should make this section a single image so that we dont need multiple html elements. -->
                     <img src="images/logo.jpg" alt="Picture of PC">
                     <h1>PCPickr</h1>
                 </section>
 
-                <section class = "login">
-                    <p>Browsing as: GuestTEMP</p> 
-                    <!-- Trigger/Open The Modal -->
-                    <button id="myBtn" class = "loginButton">login</button>
-                    <!-- The Modal -->
-                    <div id="myModal" class="modal">
-                        <!-- Modal content -->
-                        <form action = "loginUser" method = "post">
-                            <div class="modal-content">
-                                <!-- close button -->
-                                <span class="close">&times;</span>
-            
-                                <!-- actual form -->
-                                <label><b>Username</b></label>
-                                <input type="text" placeholder="Enter Username" name="userName" required>
-                        
-                                <label><b>Password</b></label>
-                                <input type="passWord" placeholder="Enter Password" name="passWord" required>
-                        
-                                <button type="submit" class ="loginButton">Login</button>
-                                <label>
-                            </div>
+                <section class="login">
+
+                    <!-- If we are logged in, display a log out button -->
+                    <% if(login.username) {%>
+                        <p>Welcome, <%= login.username %>!</p>
+                        <form action="/logout" method="post">
+                            <button type="submit" class="logoutButton">Sign Out</button>
                         </form>
-                    </div>
+                        <!-- If we arent logged in, offer to log in. -->
+                    <% } else { %>
+                        <p>Not currently logged in</p>
+                        <button id="myBtn" class="loginButton">login</button>
+                        <!-- The Modal -->
+                        <div id="myModal" class="modal">
+                            <!-- Modal content -->
+                            <form action="/login" method="post">
+                                <div class="modal-content">
+                                    <!-- close button -->
+                                    <span class="close">&times;</span>
+
+                                    <!-- actual form -->
+                                    <label><b>Username</b></label>
+                                    <input type="text" placeholder="Enter Username" name="userName" required>
+
+                                    <label><b>Password</b></label>
+                                    <input type="password" placeholder="Enter Password" name="passWord" required>
+                                    <% if (error) { %>
+                                        <p class="error"><%= error %></p>
+                                    <% } %>
+
+                                    <button type="submit" class="loginButton">Login</button>
+                                    <label>
+                                </div>
+                            </form>
+                        </div>
+                    <% } %>
                 </section>
             </header>
 
