@@ -26,14 +26,11 @@ create table users(
     user_password varchar(255),
     filters varchar(255),
     username varchar(255), 
-    account_created datetime default now()
+    account_created datetime default now(),
+    products_selected varchar(255)    
 );
 
 DROP TABLE IF EXISTS shopping_cart;
-create table shopping_cart(
-	id int(5) auto_increment primary key,
-    products_selected varchar(255)
-);
 
 insert into parts (id, manufacturer_id, component_type, part_name, content, price, img_url)
 values ('1', '10', 'CPU', 'INTEL Core i7 6700k', 'The 6th Generation Intel Core i7 processors deliver a new class of computing with a host of new features to power the next generation of desktops, laptops, and 2 in 1 PCs.', '85', '/images/6700k.png');
@@ -92,7 +89,6 @@ values ('11', 'CPU', 'AMD Ryzen 7600k', 'Customers find the computer processor o
 insert into parts (manufacturer_id, component_type, part_name, content, price, img_url)
 values ('11', 'CPU', 'AMD Ryzen 7800X3D', 'Customers are satisfied with the computer processor\'s gaming performance, value for money, speed, and functionality. They find it a powerful single-core and multi-threaded processor that runs smoothly.', '437', '/images/ryzen7800X3D.jpg');
 
-
 /* Manufacturers */
 
 insert into manufacturer (id, brand, headquarter_address, phone_number)
@@ -114,28 +110,16 @@ insert into manufacturer (id, brand, headquarter_address)
 values ('14', 'HYTE', '3824 Cedar Springs Road, Suite 430 Dallas, TX 75219');
 
 /* users */
-insert into users (id, username, user_password)
-values ('1', 'Not Logged In', 'TestPassword1');
+insert into users (id, username, user_password, products_selected)
+values ('1', 'Not Logged In', 'TestPassword1', '[325,326,327]');
 
-insert into users (username, user_password)
-values ('Admin2', 'TestPassword2');
+insert into users (username, user_password, products_selected)
+values ('Admin2', 'TestPassword2', '[325,326,327]');
 
-insert into users (username, user_password)
-values ('Admin3', 'TestPassword3');
-
-/* shoppingcarts */
-
-insert into shopping_cart (id, products_selected)
-values ('00001', '324, 325, 326');
-
-insert into shopping_cart (products_selected)
-values ('324, 325, 326');
-
-insert into shopping_cart (products_selected)
-values ('324, 325, 326');
+insert into users (username, user_password, products_selected)
+values ('Admin3', 'TestPassword3', '[325,326,327]');
 
 
 SELECT * FROM parts;
 SELECT * FROM manufacturer;
 SELECT * FROM users;
-Select * FROM shopping_cart;

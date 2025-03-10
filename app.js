@@ -36,6 +36,12 @@ app.use(
     saveUninitialized: true,
   })
 );
+app.use((req, res, next) => {
+  if (!req.session.originalUrl) {
+    req.session.originalUrl = req.originalUrl;
+  }
+  next();
+});
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -44,32 +50,26 @@ const PORT = process.env.APP_PORT || 3000;
 
 app.get("/", async (req, res) => {
   const conn = await connect();
-  let query = "SELECT * FROM parts";
   const parts = await conn.query("SELECT * FROM parts");
-  conn.release(); // Release the connection back to the pool
-  res.render("home", { parts, login: req.session.user || {}, error: null });
+  conn.release();
+  res.render("home", {
+    parts,
+    login: req.session.user || {},
+    error: null,
+    originalUrl: req.session.originalUrl,
+  });
+  req.session.originalUrl = null;
 });
 
 app.post("/login", async (req, res) => {
-  const { userName, passWord } = req.body;
+  const { userName, passWord, redirectTo } = req.body;
   const conn = await connect();
   const userQuery =
     "SELECT * FROM users WHERE username = ? AND user_password = ?";
   const users = await conn.query(userQuery, [userName, passWord]);
-
-  if (users.length > 0) {
-    req.session.user = users[0];
-    conn.release(); // Release the connection back to the pool
-    res.redirect("/");
-  } else {
-    const parts = await conn.query("SELECT * FROM parts");
-    conn.release(); // Release the connection back to the pool
-    res.render("home", {
-      parts,
-      login: {},
-      error: "Invalid username or password",
-    });
-  }
+  req.session.user = users[0];
+  conn.release();
+  res.redirect(redirectTo || "/");
 });
 
 app.post("/logout", (req, res) => {
@@ -83,13 +83,8 @@ app.post("/logout", (req, res) => {
 
 app.get("/admin", async (req, res) => {
   const conn = await connect();
-  const orders = await conn.query("SELECT * FROM shopping_cart");
   conn.release(); // Release the connection back to the pool
   res.render("admin", { orders });
-});
-
-app.get("/confirmed", (req, res) => {
-  res.render("confirmed");
 });
 
 app.post("/filtered", async (req, res) => {
@@ -131,11 +126,18 @@ app.post("/filtered", async (req, res) => {
   }
 });
 
-app.get("/cart", async (req, res) => {
+app.post("/cart", async (req, res) => {
   const conn = await connect();
-  const shoppingCart = await conn.query("SELECT * FROM shopping_cart");
+  const shoppingCart = await conn.query(
+    "SELECT username, products_selected FROM users"
+  );
   conn.release(); // Release the connection back to the pool
-  res.render("cart", { shoppingCart });
+  res.render("cart", {
+    shoppingCart,
+    login: req.session.user || {},
+    originalUrl: req.session.originalUrl,
+  });
+  req.session.originalUrl = null; // Clear the original URL after rendering
 });
 
 // Tell the server to listen on our specified port

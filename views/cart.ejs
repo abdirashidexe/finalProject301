@@ -1,14 +1,65 @@
-<!-- Shopping cart page: displays users added items-->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shopping Cart</title>
-    <link rel="stylesheet" href="styles/styles.css">
-    <link rel="stylesheet" id="modalCSS" href="styles/modal.css">
-</head>
-<body>
-    <h1>Shopping Cart</h1>
-</body>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="styles/layout.css" />
+    <link rel="stylesheet" href="styles/modal.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <section class="cosmetic">
+          <img src="images/partpicker.png" alt="Picture of PC" />
+        </section>
+
+        <section class="login">
+          <% if (login.username) { %>
+          <p>Welcome, <%= login.username %>!</p>
+          <form action="/logout" method="post">
+            <button type="submit" class="logoutButton">Sign Out</button>
+          </form>
+          <% } else { %>
+          <p>Not currently logged in</p>
+          <button id="myBtn" class="loginButton">Login</button>
+          <div id="myModal" class="modal">
+            <form action="/login" method="post">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <label><b>Username</b></label>
+                <input
+                  type="text"
+                  placeholder="Enter Username"
+                  name="userName"
+                  required
+                />
+                <label><b>Password</b></label>
+                <input
+                  type="password"
+                  placeholder="Enter Password"
+                  name="passWord"
+                  required
+                />
+                <input
+                  type="hidden"
+                  name="redirectTo"
+                  value="<%= originalUrl %>"
+                />
+                <button type="submit" class="loginButton">Login</button>
+              </div>
+            </form>
+          </div>
+          <% } %>
+          <form action="/" method="get">
+            <button type="submit">Continue Shopping</button>
+          </form>
+        </section>
+      </header>
+
+      <main></main>
+    </div>
+  </body>
+  <script src="scripts/login.js" defer></script>
 </html>
