@@ -36,7 +36,7 @@ create table shopping_cart(
 );
 
 insert into parts (id, manufacturer_id, component_type, part_name, content, price, img_url)
-values ('324', '10', 'CPU', 'INTEL Core i7 6700k', 'Old CPU that is outdated.', '150', 'public', '/images/6700k.png');
+values ('1', '10', 'CPU', 'INTEL Core i7 6700k', 'Old CPU that is outdated.', '150', '/images/6700k.png');
 
 insert into parts (manufacturer_id, component_type, part_name, content, price, img_url)
 values ('15', 'Case', 'Cooler Master MasterBox Q300L MicroATX Mini Tower Case', 'A great, small and cheap case with a tinted side panel and space for a large GPU.', '39.99', '/images/Q300L.jpg');
