@@ -54,7 +54,7 @@ insert into parts (manufacturer_id, component_type, part_name, content, price, i
 values ('12', 'GPU', 'GTX 980TI', 'Old but reliable graphics card', '150', '/images/980ti.png');
 
 insert into parts (manufacturer_id, component_type, part_name, content, price, img_url)
-values ('12', 'GPU', 'GTX 1080TI', 'Old but reliable graphics card', '200', '/images/1080ti.jpg');
+values ('12', 'GPU', 'GTX 1080TI', 'Old but reliable graphics card', '200', '/images/1080ti.png');
 
 insert into parts (manufacturer_id, component_type, part_name, content, price, img_url)
 values ('12', 'GPU', 'GTX 2080TI', 'Old but reliable graphics card', '200', '/images/2080ti.png');

@@ -49,10 +49,13 @@
 
         <main>
             
+            <!-- should be if there are not any with selected filters -->
 
             <% if (parts.length == 0) {%>
                 <div>No parts match this description!</div>
             <% } %>
+
+            <!-- Filters are strict so there is not more than 9. -->
 
             <% if (parts.length <= 9) {%>
                 <% for (let i = 0; i < parts.length; i++) { %>
@@ -68,6 +71,9 @@
                     </div>  
                 <% } %>
             <% } %>
+
+            <!-- Filters are loose so there are more than 10. Will display 9 - ask to refine filters further. -->
+            <!-- Not Implemented yet!!! -->
 
             <% if (parts.length > 9){%>
                 <% for (let i = 0; i < parts.length; i++) { %>
