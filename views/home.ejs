@@ -87,13 +87,13 @@
             <!-- Not Implemented yet!!! -->
 
             <% if (parts.length > 9){%>
-                <% for (let i = 0; i < parts.length; i++) { %>
+                <% for (let i = 0; i < 10; i++) { %>
                     <div class="items">
                         <div class="itemPic">
-                            <img src="images/case_example.jpg" alt="A PC case">
+                            <img src= "<%= parts[i].img_url %>" alt="A PC case">
                         </div>
                         <div class="nameDesc">
-                            <h2><%= parts[i].part_name %></h2>
+                            <h2><%= parts[i].part_name %> </h2>
                             <p><%= parts[i].content %></p>
                         </div>
                         <button class="addToCartBtn">+</button>
