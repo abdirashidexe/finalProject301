@@ -1,202 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>PCPickr</title>
-        <link rel="stylesheet" href="styles/styles.css">
-        <link rel="stylesheet" href="styles/layout.css">
-        <link rel="stylesheet" href="styles/modal.css">
-        <link rel="stylesheet" href="styles/collapsible.css">
-    </head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PCPickr</title>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="styles/layout.css" />
+    <link rel="stylesheet" href="styles/modal.css" />
+    <link rel="stylesheet" href="styles/collapsible.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <section class="cosmetic">
+          <img src="images/logo.jpg" alt="Picture of PC" />
+          <h1>PCPickr</h1>
+        </section>
 
-    <div class = "container">
-        <body>
-            <header>
-                <section class = "cosmetic">
-                    <!-- we should make this section a single image so that we dont need multiple html elements. -->
-                    <img src="images/logo.jpg" alt="Picture of PC">
-                    <h1>PCPickr</h1>
-                </section>
-
-                <section class="login">
-
-                    <!-- If we are logged in, display a log out button -->
-                    <% if(login.username) {%>
-                        <p>Welcome, <%= login.username %>!</p>
-                        <form action="/logout" method="post">
-                            <button type="submit" class="logoutButton">Sign Out</button>
-                        </form>
-                        <!-- If we arent logged in, offer to log in. -->
-                    <% } else { %>
-                        <p>Not currently logged in</p>
-                        <button id="myBtn" class="loginButton">login</button>
-                        <!-- The Modal -->
-                        <div id="myModal" class="modal">
-                            <!-- Modal content -->
-                            <form action="/login" method="post">
-                                <div class="modal-content">
-                                    <!-- close button -->
-                                    <span class="close">&times;</span>
-
-                                    <!-- actual form -->
-                                    <label><b>Username</b></label>
-                                    <input type="text" placeholder="Enter Username" name="userName" required>
-
-                                    <label><b>Password</b></label>
-                                    <input type="password" placeholder="Enter Password" name="passWord" required>
-                                    <% if (error) { %>
-                                        <p class="error"><%= error %></p>
-                                    <% } %>
-
-                                    <button type="submit" class="loginButton">Login</button>
-                                    <label>
-                                </div>
-                            </form>
-                        </div>
-                    <% } %>
-                </section>
-            </header>
-
-        <main>
-            
-            <!-- should be if there are not any with selected filters -->
-
-            <% if (parts.length == 0) {%>
-                <div>No parts match this description!</div>
-            <% } %>
-
-            <!-- Filters are strict so there is not more than 9. -->
-
-            <% if (parts.length <= 9) {%>
-                <% for (let i = 0; i < parts.length; i++) { %>
-                    <div class="items">
-                        <div class="itemPic">
-                            <img src= "<%= parts[i].img_url %>" alt="A PC case">
-                        </div>
-                        <div class="nameDesc">
-                            <h2><%= parts[i].part_name %> </h2>
-                            <p><%= parts[i].content %></p>
-                        </div>
-                        <button class="addToCartBtn">+</button>
-                    </div>  
+        <section class="login">
+          <% if (login.username) { %>
+          <p>Welcome, <%= login.username %>!</p>
+          <form action="/logout" method="post">
+            <button type="submit" class="logoutButton">Sign Out</button>
+          </form>
+          <% } else { %>
+          <p>Not currently logged in</p>
+          <button id="myBtn" class="loginButton">Login</button>
+          <div id="myModal" class="modal">
+            <form action="/login" method="post">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <label><b>Username</b></label>
+                <input
+                  type="text"
+                  placeholder="Enter Username"
+                  name="userName"
+                  required
+                />
+                <label><b>Password</b></label>
+                <input
+                  type="password"
+                  placeholder="Enter Password"
+                  name="passWord"
+                  required
+                />
+                <% if (error) { %>
+                <p class="error"><%= error %></p>
                 <% } %>
-            <% } %>
+                <button type="submit" class="loginButton">Login</button>
+              </div>
+            </form>
+          </div>
+          <% } %>
+        </section>
+      </header>
 
-            <!-- Filters are loose so there are more than 10. Will display 9 - ask to refine filters further. -->
-            <!-- Not Implemented yet!!! -->
+      <main>
+        <% if (parts.length == 0) { %>
+        <div class="items">
+          <div class="itemPic">
+            <img src="/images/case_example.jpg" alt="A PC case" />
+          </div>
+          <div class="nameDesc">
+            <h2>Can't Find what you are looking for?</h2>
+            <p>Try adjusting your filters to refine your search!</p>
+          </div>
+        </div>
+        <% } else if (parts.length <= 9) { %> <% for (let i = 0; i <
+        parts.length; i++) { %>
+        <div class="items">
+          <div class="itemPic">
+            <img src="<%= parts[i].img_url %>" alt="A PC case" />
+          </div>
+          <div class="nameDesc">
+            <h2><%= parts[i].part_name %></h2>
+            <p><%= parts[i].content %></p>
+          </div>
+          <button class="addToCartBtn">+</button>
+        </div>
+        <% } %> <% } %> <% if (parts.length > 9) { %> <% for (let i = 0; i < 10;
+        i++) { %>
+        <div class="items">
+          <div class="itemPic">
+            <img src="<%= parts[i].img_url %>" alt="A PC case" />
+          </div>
+          <div class="nameDesc">
+            <h2><%= parts[i].part_name %></h2>
+            <p><%= parts[i].content %></p>
+          </div>
+          <button class="addToCartBtn">+</button>
+        </div>
+        <% } %>
+        <div class="items">
+          <div class="itemPic">
+            <img src="/images/case_example.jpg" alt="A PC case" />
+          </div>
+          <div class="nameDesc">
+            <h2>Can't Find what you are looking for?</h2>
+            <p>Try adjusting your filters to refine your search!</p>
+          </div>
+        </div>
+        <% } %>
 
-            <% if (parts.length > 9){%>
-                <% for (let i = 0; i < 10; i++) { %>
-                    <div class="items">
-                        <div class="itemPic">
-                            <img src= "<%= parts[i].img_url %>" alt="A PC case">
-                        </div>
-                        <div class="nameDesc">
-                            <h2><%= parts[i].part_name %> </h2>
-                            <p><%= parts[i].content %></p>
-                        </div>
-                        <button class="addToCartBtn">+</button>
-                    </div>  
-                <% } %>
-                <div class="items">
-                    <div class="itemPic">
-                        <img src= "/images/case_example.jpg" alt="A PC case">
-                    </div>
-                    <div class="nameDesc">
-                        <h2>Cant Find what you are looking for?</h2>
-                        <p>Try adjusting your filters to refine your search!</p>
-                    </div>
-                </div>  
-            <% } %>
+        <form action="thankyou" method="post">
+          <button type="submit" class="buildButton">Build</button>
+        </form>
+        <hr />
+      </main>
 
-                    <!-- Place order button -->
-                    <form action="thankyou" method="post">
-                        <button type="submit" class = "buildButton">Build</button>
-                    </form>
-                <hr>
-            </main>
+      <aside>
+        <h2>Advanced Filters</h2>
+        <form id="filterForm" action="/filtered" method="post">
+          <button type="button" class="collapsible">Component</button>
+          <div class="content">
+            <ul>
+              <li>
+                <label>
+                  <input type="checkbox" name="component" value="CPU" />CPU
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" name="component" value="GPU" />GPU
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="component"
+                    value="motherboard"
+                  />Motherboard
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="component"
+                    value="memory"
+                  />Memory
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" name="component" value="ram" />RAM
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" name="component" value="Case" />Case
+                </label>
+              </li>
+            </ul>
+          </div>
+          <button class="collapsible" type="button">Manufacturer</button>
+          <div class="content">
+            <ul>
+              <li>
+                <label>
+                  <input type="checkbox" name="manufacturer" value="10" />Intel
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" name="manufacturer" value="11" />AMD
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" name="manufacturer" value="12" />Nvidia
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" name="manufacturer" value="13" />NZXT
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" name="manufacturer" value="14" />HYTE
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="manufacturer"
+                    value="15"
+                  />Coolermaster
+                </label>
+              </li>
+            </ul>
+          </div>
+          <button type="submit" class="filterButton">Apply Filters</button>
+        </form>
+      </aside>
 
-                <aside>
-                    <h2>Advanced Filters</h2>
-                    <button class="collapsible">Component</button>
-                    <div class="content">
-                        <ul>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="component" value="CPU">CPU
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="component" value="GPU">GPU
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="component" value="motherboard">Motherboard
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="component" value="memory">Memory
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="component" value="ram">RAM
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="component" value="Case">Case
-                                </label>
-                            </li>
-                        </ul>
-                    </div>
-                    <button class="collapsible">Manufactorer</button>
-                    <div class="content">
-                        <ul>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="component" value="10">Intel
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="component" value="11">AMD
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="component" value="12">Nvidia
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="component" value="13">NZXT
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="component" value="14">HYTE
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="component" value="15">Coolermaster
-                                </label>
-                            </li>
-                        </ul>
-                    </div>
-                </aside>
+      <footer>
+        <a id="contact-button" href="#" role="button">Contact Us</a>
+      </footer>
 
-                <footer>
-                    <a id="contact-button" href="#" role="button">Contact Us</a>
-                </footer>
-
-            <script src="scripts/login.js" defer></script>
-            <script src="scripts/collapsible.js" defer></script>
-        </body>
+      <script src="scripts/login.js" defer></script>
+      <script src="scripts/collapsible.js" defer></script>
     </div>
+  </body>
 </html>
