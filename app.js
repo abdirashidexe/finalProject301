@@ -12,6 +12,7 @@ const pool = mariadb.createPool({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   port: process.env.DB_PORT,
+  connectionLimit: 10,
 });
 
 // Define function to connect to the DB
@@ -45,6 +46,7 @@ app.get("/", async (req, res) => {
   const conn = await connect();
   let query = "SELECT * FROM parts";
   const parts = await conn.query("SELECT * FROM parts");
+  conn.release(); // Release the connection back to the pool
   res.render("home", { parts, login: req.session.user || {}, error: null });
 });
 
@@ -57,9 +59,11 @@ app.post("/login", async (req, res) => {
 
   if (users.length > 0) {
     req.session.user = users[0];
+    conn.release(); // Release the connection back to the pool
     res.redirect("/");
   } else {
     const parts = await conn.query("SELECT * FROM parts");
+    conn.release(); // Release the connection back to the pool
     res.render("home", {
       parts,
       login: {},
@@ -80,6 +84,7 @@ app.post("/logout", (req, res) => {
 app.get("/admin", async (req, res) => {
   const conn = await connect();
   const orders = await conn.query("SELECT * FROM shopping_cart");
+  conn.release(); // Release the connection back to the pool
   res.render("admin", { orders });
 });
 
@@ -116,18 +121,20 @@ app.post("/filtered", async (req, res) => {
     query += " WHERE " + filters.join(" AND ");
   }
 
-  try {
-    const parts = await conn.query(query, queryParams);
+  const parts = await conn.query(query, queryParams);
+
+  conn.release(); // Release the connection back to the pool
+  if (filters.length === 0) {
+    res.redirect("/");
+  } else {
     res.render("home", { parts, login: req.session.user || {}, error: null });
-  } catch (err) {
-    console.log(`Error executing query: ${err}`);
-    res.status(500).send("Error executing query");
   }
 });
 
 app.get("/cart", async (req, res) => {
   const conn = await connect();
   const shoppingCart = await conn.query("SELECT * FROM shopping_cart");
+  conn.release(); // Release the connection back to the pool
   res.render("cart", { shoppingCart });
 });
 
