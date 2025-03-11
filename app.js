@@ -186,6 +186,7 @@ app.post("/filtered", async (req, res) => {
 // This is an ugly mf. It works. OORAH.
 // I learnt ALOT about sessions, how they work, and I probably hate myself the
 // more I think about doing a really tough concept. Building a STORE??
+
 app.post("/cart", async (req, res) => {
   const { partIds } = req.body;
   console.log("Received partIds:", partIds);
