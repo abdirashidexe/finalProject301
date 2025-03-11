@@ -42,11 +42,6 @@
                   name="passWord"
                   required
                 />
-                <input
-                  type="hidden"
-                  name="redirectTo"
-                  value="<%= originalUrl %>"
-                />
                 <button type="submit" class="loginButton">Login</button>
               </div>
             </form>
@@ -58,7 +53,29 @@
         </section>
       </header>
 
-      <main></main>
+      <main>
+        <% if (parts.length == 0) { %>
+        <p>Your cart is empty!</p>
+        <% } else { %>
+        <ul>
+          <% for (let i = 0; i < parts.length; i++) { %>
+          <li>
+            <div class="items" id="<%= parts[i].id %>">
+                <div class="itemPic">
+                    <img src="<%= parts[i].img_url %>" alt="<%= parts[i].part_name %>" />
+                </div>
+                <div class="nameDesc">
+                    <h2><%= parts[i].part_name %></h2>
+                    <p><%= parts[i].content %></p>
+                </div>
+                <div class="price">
+                    <p>$<%= parts[i].price %></p>
+                </div>
+          </li>
+          <% } %>
+        </ul>
+        <% } %>
+      </main>
     </div>
   </body>
   <script src="scripts/login.js" defer></script>

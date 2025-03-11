@@ -46,20 +46,13 @@
                 <% if (error) { %>
                 <p class="error"><%= error %></p>
                 <% } %>
-                <input
-                  type="hidden"
-                  name="redirectTo"
-                  value="<%= originalUrl %>"
-                />
                 <button type="submit" class="loginButton">Login</button>
               </div>
             </form>
           </div>
           <% } %>
-          <form action="cart" method="post">
-            <button type="submit" class="buildButton">
-              View Shopping Cart
-            </button>
+          <form action="/cart" method="post">
+            <button type="submit" id="cartButton">View Shopping Cart</button>
           </form>
         </section>
       </header>
@@ -77,25 +70,31 @@
         </div>
         <% } else if (parts.length <= 9) { %> <% for (let i = 0; i <
         parts.length; i++) { %>
-        <div class="items" id="part_id_<%= parts[i].id %>">
+        <div class="items" id="<%= parts[i].id %>">
           <div class="itemPic">
             <img src="<%= parts[i].img_url %>" alt="A PC case" />
           </div>
           <div class="nameDesc">
             <h2><%= parts[i].part_name %></h2>
             <p><%= parts[i].content %></p>
+          </div>
+          <div class="price">
+            <p>$<%= parts[i].price %></p>
           </div>
           <button class="addToCartBtn">+</button>
         </div>
         <% } %> <% } %> <% if (parts.length > 9) { %> <% for (let i = 0; i < 9;
         i++) { %>
-        <div class="items" id="part_id_<%= parts[i].id %>">
+        <div class="items" id="<%= parts[i].id %>">
           <div class="itemPic">
             <img src="<%= parts[i].img_url %>" alt="A PC case" />
           </div>
           <div class="nameDesc">
             <h2><%= parts[i].part_name %></h2>
             <p><%= parts[i].content %></p>
+          </div>
+          <div class="price">
+            <p>$<%= parts[i].price %></p>
           </div>
           <button class="addToCartBtn">+</button>
         </div>
@@ -205,9 +204,9 @@
       <footer>
         <a id="contact-button" href="#" role="button">Contact Us</a>
       </footer>
-
-      <script src="scripts/login.js" defer></script>
-      <script src="scripts/collapsible.js" defer></script>
     </div>
   </body>
+  <script src="scripts/login.js" defer></script>
+  <script src="scripts/collapsible.js" defer></script>
+  <script src="scripts/tocart.js" defer></script>
 </html>

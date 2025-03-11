@@ -111,13 +111,13 @@ values ('14', 'HYTE', '3824 Cedar Springs Road, Suite 430 Dallas, TX 75219');
 
 /* users */
 insert into users (id, username, user_password, products_selected)
-values ('1', 'Not Logged In', 'TestPassword1', '[325,326,327]');
+values ('1', 'demo1', 'pass', '1, 4, 7');
 
 insert into users (username, user_password, products_selected)
-values ('Admin2', 'TestPassword2', '[325,326,327]');
+values ('demo2', 'pass','2, 3, 6, 8, 9, 10');
 
 insert into users (username, user_password, products_selected)
-values ('Admin3', 'TestPassword3', '[325,326,327]');
+values ('demo3', 'pass', '1');
 
 
 SELECT * FROM parts;
