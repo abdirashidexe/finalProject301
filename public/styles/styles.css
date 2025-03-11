@@ -78,7 +78,7 @@ select {
 }
 
 hr {
-  border: 2px solid rgb(193, 169, 144);
+  border: 2px solid rgb(240, 240, 240);
   border-radius: 5px;
 }
 
@@ -87,6 +87,12 @@ button {
   border-radius: 5px;
   color: white;
   margin: 10px;
+}
+
+#contact-button
+{
+  display:flex;
+  justify-content: center;
 }
 
 .addToCartBtn {
@@ -123,7 +129,17 @@ ul {
   border-radius: 8px;
   width: 300px;
   text-align: center;
+
 }
+
+.deleteBtn {
+  background-color: rgb(186, 0, 0);
+}
+
+.deleteBtn:hover {
+  background-color: darkred;
+}
+
 
 /* Large screens */
 @media (min-width: 768px) {

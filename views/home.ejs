@@ -73,6 +73,8 @@
         <div class="items" id="<%= parts[i].id %>">
           <div class="itemPic">
             <img src="<%= parts[i].img_url %>" alt="A PC case" />
+            <%#= console.log(parts[i].img_url) %> <%# prints undefined %>
+            <%#= console.log(parts) %>            <%# prints array items of "parts", issue is no row for img_url%>
           </div>
           <div class="nameDesc">
             <h2><%= parts[i].part_name %></h2>
@@ -115,7 +117,6 @@
           </div>
         </div>
         <% } %>
-        <hr />
       </main>
 
       <aside>
@@ -208,6 +209,7 @@
       </aside>
 
       <footer>
+        <hr/>
         <a id="contact-button" href="#" role="button">Contact Us</a>
       </footer>
     </div>

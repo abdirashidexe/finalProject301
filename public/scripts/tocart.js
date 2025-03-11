@@ -1,4 +1,3 @@
-
 const addToCartButtons = document.querySelectorAll(".addToCartBtn")
 
 const popup = document.getElementById('popup');
@@ -7,6 +6,14 @@ closeBtn.addEventListener('click', () => {
     popup.style.display = 'none';
 });
 
+const deleteButtons = document.querySelectorAll(".deleteBtn");
+/*console.log(deleteButtons);*/
+
+deleteButtons.forEach(button => {
+  button.addEventListener('click', function () {
+    alert("Item deleted!");
+  })
+});
 
 const selectedParts = [];
 // this is just so that we can press nothing and view cart. to view cart, we need two inputs.
@@ -54,3 +61,4 @@ cartButton.addEventListener("click", function (event) {
   document.body.appendChild(form);
   form.submit();
 });
+
