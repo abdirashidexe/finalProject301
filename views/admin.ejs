@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Page</title>
-    <link rel="stylesheet" href="styles/styles.css">
-    <link rel="stylesheet" id="modalCSS" href="styles/modal.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" id="modalCSS" href="styles/modal.css" />
+  </head>
+  <body>
     <h1>Admin Page</h1>
-    <% if (orders.length == 0) {%>
-        <div>No posts!</div>
+    <% if (data.length == 0) {%>
+    <div>No purchases!</div>
+    <% } %> <% for (let i = 0; i < data.length; i++) { %>
+    <section class="entry">
+      <div><%= data[i].user_id %></div>
+      <div><%= data[i].username %></div>
+      <div><%= data[i].user_password %></div>
+      <div><%= data[i].account_created %></div>
+      <div><%= data[i].products_selected %></div>
+      <hr />
+    </section>
     <% } %>
-
-    <% for (let i = 0; i < orders.length; i++) { %>
-        <section class = "entry">
-        <div><%= orders[i].products_selected %></div>
-        </section>
-    <% } %>
-</body>
+  </body>
 </html>

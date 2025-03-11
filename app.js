@@ -57,7 +57,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Kill HTML and EJS rises.
+// Kill HTML and EJS shall rise more powerful than you could ever imagine.
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
@@ -116,9 +116,13 @@ app.post("/logout", (req, res) => {
   });
 });
 
-// does nothing.
+// theoritcally admin should not have any user login information.
+// thankfully that means we dont need to log in or use sessions.
 app.get("/admin", async (req, res) => {
-  res.render("confirmed");
+  const conn = await connect();
+  const data = await conn.query("SELECT * FROM users;");
+  conn.release(); // I AM RELEASING!!!!!
+  res.render("admin", { data });
 });
 
 // Another big beefy boy. Filtering logic. You would think it would be easy.
@@ -160,7 +164,8 @@ app.post("/filtered", async (req, res) => {
 
   const parts = await conn.query(query, queryParams);
 
-  conn.release();
+  conn.release(); // I AM RELEASING!!!!!
+
   if (filters.length === 0) {
     res.redirect("/");
   } else {
@@ -216,8 +221,9 @@ app.post("/cart", async (req, res) => {
       ${partIds.map(() => "?").join(", ")})`;
       parts = await conn.query(selectQuery, partIds);
     }
-    conn.release();
+    conn.release(); // I AM RELEASING!!!!!
   } catch (err) {
+    // I AM RELEASING!!!!!
     conn.release();
     console.error("Error executing query:", err);
     return res
