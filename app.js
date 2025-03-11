@@ -1,11 +1,16 @@
+// Im IMPORTING!!!!
 import express from "express";
 import mariadb from "mariadb";
 import session from "express-session";
 import dotenv from "dotenv";
 
+// my env
 dotenv.config();
 
-// Define our database credentials
+// Unique to everyone.
+// Connection Limit ensures there arent a million connections
+// lookin at the database at the same time. Its probably bad or somethin.
+// Too bad we aint doin that.
 const pool = mariadb.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -15,7 +20,7 @@ const pool = mariadb.createPool({
   connectionLimit: 10,
 });
 
-// Define function to connect to the DB
+// IM CONNECTINGGGG
 async function connect() {
   try {
     const conn = await pool.getConnection();
@@ -26,9 +31,15 @@ async function connect() {
   }
 }
 
+// Very deeply self explanatory
 const app = express();
 
+// Magical words that for some reason make the website work.
 app.use(express.urlencoded({ extended: true }));
+
+// Deep magic. Technically saving my secret key in plaintext is
+// the worst thing I, or anyone, could do.
+// I also do that with my passwords for the users.
 app.use(
   session({
     secret: "your_secret_key",
@@ -36,6 +47,9 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+// This is so that when you log in, you go back to the page you were on.
+// I barely use it. I will use it more in the future.
 app.use((req, res, next) => {
   if (!req.session.originalUrl) {
     req.session.originalUrl = req.originalUrl;
@@ -43,11 +57,15 @@ app.use((req, res, next) => {
   next();
 });
 
+// Kill HTML and EJS rises.
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
 const PORT = process.env.APP_PORT || 3000;
 
+// Home page
+// I have rerouted abunch of stuff to go BACK to the home page.
+// Logout? Home page. Filtered Page? Home page. Cart? Actually the cart.
 app.get("/", async (req, res) => {
   const conn = await connect();
   const parts = await conn.query("SELECT * FROM parts");
@@ -59,6 +77,12 @@ app.get("/", async (req, res) => {
   });
 });
 
+// Big beefy boy responsible for login logic.
+// We define what we are looking for in the modal, query the database,
+// and if we find it, you get rerouted to home and it says welcome.
+// If not, it takes you to /login which is nearly identical to the home page
+// except it says "Invalid username or password" in red ONLY if you click login again.
+// I need to fix that...
 app.post("/login", async (req, res) => {
   const { userName, passWord, redirectTo } = req.body;
   const conn = await connect();
@@ -71,7 +95,8 @@ app.post("/login", async (req, res) => {
     conn.release();
     res.redirect(redirectTo || "/");
   } else {
-    conn.release(); // Release the connection back to the pool
+    conn.release();
+    // big dumb and ugly. fix.
     res.render("home", {
       parts: [],
       login: {},
@@ -81,6 +106,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
+// Fucking nuke the session. You are no longer logged in. Womp womp.
 app.post("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {
@@ -90,10 +116,19 @@ app.post("/logout", (req, res) => {
   });
 });
 
+// does nothing.
 app.get("/admin", async (req, res) => {
   res.render("confirmed");
 });
 
+// Another big beefy boy. Filtering logic. You would think it would be easy.
+// It is not.
+// The user has to select their filters. They can select multiple filters.
+// We store those filters in an array. Then we gotta check if multiple filters are picked
+// or if one is. We Build a big fuckin query depending on whats goin on and then
+// process it.
+// fun side adventure - if user selected no filters, we redirect back to /
+// which is frickin' epic. I love redirecting!!!
 app.post("/filtered", async (req, res) => {
   const conn = await connect();
 
@@ -133,52 +168,57 @@ app.post("/filtered", async (req, res) => {
   }
 });
 
+// The actual bane of my existance. This took me a majority of the time I have been working.
+// This works along side the tocart.js file in the public/scripts folder.
+// which procs when you click the "Add to Cart" button.
+// technically, you need to recieve something here if you want to view the cart.
+// Actually you need two things.
+// if you want to view the cart after selecting nothin, you actually get two -1s.
+// they dont do nuffin.
+// regardless, it works if the user is logged in or not.
+// guests can add to cart and view cart. they just cant save their cart.
+// users can add to cart, view to cart, and save between sessions.
+// This is an ugly mf. It works. OORAH.
+// I learnt ALOT about sessions, how they work, and I probably hate myself the
+// more I think about doing a really tough concept. Building a STORE??
 app.post("/cart", async (req, res) => {
   const { partIds } = req.body;
   console.log("Received partIds:", partIds);
-
   const conn = await connect();
-  if (!conn) {
-    return res
-      .status(500)
-      .json({ success: false, message: "Error connecting to the database" });
-  }
-
   let parts = [];
   try {
     const userId = req.session.user ? req.session.user.id : null;
+    // user logged in.
     if (userId) {
-      // Retrieve previously selected parts
+      // previously selected parts
       const userQuery = `SELECT products_selected FROM users WHERE id = ?`;
       const userResult = await conn.query(userQuery, [userId]);
       let previousParts = userResult[0].products_selected
         ? userResult[0].products_selected.split(",").map((id) => id.trim())
         : [];
-
       // Merge with newly selected parts and remove duplicates
       const mergedParts = Array.from(
         new Set([...previousParts, ...(partIds || [])])
       );
-
       // Update the database with the merged list of parts
       const updateQuery = `UPDATE users SET products_selected = ? WHERE id = ?`;
       await conn.query(updateQuery, [mergedParts.join(", "), userId]);
-
       // Retrieve the parts details for rendering
       const selectQuery = `SELECT * FROM parts WHERE id IN (${mergedParts
         .map(() => "?")
         .join(", ")})`;
       parts = await conn.query(selectQuery, mergedParts);
-    } else if (partIds && partIds.length > 0) {
-      // If the user is not logged in, just retrieve the parts details for the selected parts
-      const selectQuery = `SELECT * FROM parts WHERE id IN (${partIds
-        .map(() => "?")
-        .join(", ")})`;
+    }
+    // User is not logged in and we are dealing with a guest. We will be only
+    // sending them locally stored data that disappears on refresh.
+    else if (partIds && partIds.length > 0) {
+      const selectQuery = `SELECT * FROM parts WHERE id IN (
+      ${partIds.map(() => "?").join(", ")})`;
       parts = await conn.query(selectQuery, partIds);
     }
-    conn.release(); // Release the connection back to the pool
+    conn.release();
   } catch (err) {
-    conn.release(); // Release the connection back to the pool
+    conn.release();
     console.error("Error executing query:", err);
     return res
       .status(500)
@@ -188,7 +228,7 @@ app.post("/cart", async (req, res) => {
   res.render("cart", { parts, login: req.session.user || {} });
 });
 
-// Tell the server to listen on our specified port
+// local host moment *vine boom*
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });
