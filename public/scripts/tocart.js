@@ -1,18 +1,21 @@
-const popup = document.getElementById('popup');
+// These need to work first before being implemented
+// while the errors are popping up, it prevents the other code
+// from running.
+
+/* const popup = document.getElementById('popup');
 const closeBtn = document.getElementById('closePopup');
 closeBtn.addEventListener('click', () => {
     popup.style.display = 'none';
-});
+}); */
 
-const deleteButtons = document.getElementsByClassName("deleteBtn");
+/* const deleteButtons = document.getElementsByClassName("deleteBtn"); */
 /*console.log(deleteButtons);*/
 
-// replace with a for loop please!!
-deleteButtons.forEach(button => {
+/* deleteButtons.forEach(button => {
   button.addEventListener('click', function () {
     alert("Item deleted!");
   })
-});
+}); */
 
 
 const addToCartButtons = document.getElementsByClassName("addToCartBtn");
