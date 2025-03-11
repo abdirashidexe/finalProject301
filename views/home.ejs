@@ -82,6 +82,12 @@
             <p>$<%= parts[i].price %></p>
           </div>
           <button class="addToCartBtn">+</button>
+          <div id="popup" class="popup">
+            <div class="popup-content">
+              <p>Item added to cart!</p>
+              <button id="closePopup">Close</button>
+            </div>
+          </div>
         </div>
         <% } %> <% } %> <% if (parts.length > 9) { %> <% for (let i = 0; i < 9;
         i++) { %>
