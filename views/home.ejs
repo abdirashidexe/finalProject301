@@ -16,7 +16,7 @@
           <img src="images/partpicker.png" alt="Partpickr logo" />
         </section>
 
-        <section class="login">
+        <section class="registration">
           <% if (login.username) { %>
           <p>Welcome, <%= login.username %>!</p>
           <form action="/logout" method="post">
@@ -25,19 +25,20 @@
           <% } else { %>
           <p>Not currently logged in</p>
           <button id="myBtn" class="loginButton">Login</button>
+
           <div id="myModal" class="modal">
             <form action="/login" method="post">
               <div class="modal-content">
                 <span class="close">&times;</span>
                 <div id = "login">
-                  <label><b>Username</b></label>
+                  <label><b>Username:</b></label>
                   <input
                     type="text"
                     placeholder="Enter Username"
                     name="userName"
                     required
                   />
-                  <label><b>Password</b></label>
+                  <label><b>Password:</b></label>
                   <input
                     type="password"
                     placeholder="Enter Password"
@@ -49,30 +50,32 @@
                   <% } %>
                   <button type="submit" class="loginButton">Login</button>
                   <button id = "signUpChange">Don't have an account?</button>
+                </form>
               </div>
-            </form>
 
             <div id = "signUp">
-              <label><b>Username</b></label>
-              <input
-                type="text"
-                placeholder="Enter Username"
-                name="userName"
-                required
-              />
-              <label><b>Password</b></label>
-              <input
-                type="password"
-                placeholder="Enter Password"
-                name="passWord"
-                required
-              />
-              <% if (error) { %>
-              <p class="error"><%= error %></p>
-              <% } %>
-              <button type="submit" class="signUpButton">Signup</button>
-          </div>
-          
+              <form action="/register" method="post">
+                <label><b>Username:</b></label>
+                <input
+                  type="text"
+                  placeholder="New Username"
+                  name="userName"
+                  required
+                />
+                <label><b>Password:</b></label>
+                <input
+                  type="password"
+                  placeholder="New Password"
+                  name="passWord"
+                  required
+                />
+                <% if (error) { %>
+                <p class="error"><%= error %></p>
+                <% } %>
+                <button type="submit" class="signUpButton">Signup</button>
+              </form>
+            </div>
+
           </div>
           <% } %>
           <form action="/cart" method="post">
