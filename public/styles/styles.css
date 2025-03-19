@@ -89,6 +89,11 @@ button {
   margin: 10px;
 }
 
+#goHome {
+  all: unset;
+  cursor: pointer;
+}
+
 #contact-button {
   display: flex;
   justify-content: center;
