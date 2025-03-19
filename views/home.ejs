@@ -29,26 +29,50 @@
             <form action="/login" method="post">
               <div class="modal-content">
                 <span class="close">&times;</span>
-                <label><b>Username</b></label>
-                <input
-                  type="text"
-                  placeholder="Enter Username"
-                  name="userName"
-                  required
-                />
-                <label><b>Password</b></label>
-                <input
-                  type="password"
-                  placeholder="Enter Password"
-                  name="passWord"
-                  required
-                />
-                <% if (error) { %>
-                <p class="error"><%= error %></p>
-                <% } %>
-                <button type="submit" class="loginButton">Login</button>
+                <div id = "login">
+                  <label><b>Username</b></label>
+                  <input
+                    type="text"
+                    placeholder="Enter Username"
+                    name="userName"
+                    required
+                  />
+                  <label><b>Password</b></label>
+                  <input
+                    type="password"
+                    placeholder="Enter Password"
+                    name="passWord"
+                    required
+                  />
+                  <% if (error) { %>
+                  <p class="error"><%= error %></p>
+                  <% } %>
+                  <button type="submit" class="loginButton">Login</button>
+                  <button id = "signUpChange">Don't have an account?</button>
               </div>
             </form>
+
+            <div id = "signUp">
+              <label><b>Username</b></label>
+              <input
+                type="text"
+                placeholder="Enter Username"
+                name="userName"
+                required
+              />
+              <label><b>Password</b></label>
+              <input
+                type="password"
+                placeholder="Enter Password"
+                name="passWord"
+                required
+              />
+              <% if (error) { %>
+              <p class="error"><%= error %></p>
+              <% } %>
+              <button type="submit" class="signUpButton">Signup</button>
+          </div>
+          
           </div>
           <% } %>
           <form action="/cart" method="post">
