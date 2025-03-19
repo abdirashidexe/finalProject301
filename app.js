@@ -224,8 +224,7 @@ app.post("/cart", async (req, res) => {
     }
     conn.release(); // I AM RELEASING!!!!!
   } catch (err) {
-    // I AM RELEASING!!!!!
-    conn.release();
+    conn.release(); // I AM RELEASING!!!!!
     console.error("Error executing query:", err);
     return res
       .status(500)
@@ -233,6 +232,20 @@ app.post("/cart", async (req, res) => {
   }
 
   res.render("cart", { parts, login: req.session.user || {} });
+});
+
+// we're only registerin' people who are not logged in.
+// register makes a new account. thats all.
+app.post("/register", async (req, res) => {
+  const conn = await connect();
+  const { userName, passWord } = req.body;
+  const insterQuery = await conn.query(
+    `INSERT INTO users 
+        (user_password, username)
+        values (?, ?)`,
+    [passWord, userName]
+  );
+  res.redirect("/");
 });
 
 // local host moment *vine boom*
