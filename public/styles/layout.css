@@ -15,9 +15,7 @@ aside {
   .container {
     display: grid;
     margin: 0 auto;
-    padding: 20px;
     grid-template-columns: 1fr;
-    grid-gap: 15px;
     grid-template-areas:
       "head head"
       "main main"
@@ -25,7 +23,7 @@ aside {
       "foot foot";
   }
 
-  .cosmetic img {
+  .cosmetic {
     display: none;
   }
 
@@ -54,6 +52,10 @@ aside {
   }
 
   .description {
+    display: none;
+  }
+
+  .nameDesc p {
     display: none;
   }
 }
