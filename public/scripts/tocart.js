@@ -17,7 +17,6 @@ closeBtn.addEventListener('click', () => {
   })
 }); */
 
-
 const addToCartButtons = document.getElementsByClassName("addToCartBtn");
 // this is just so that we can press nothing and view cart. to view cart, we need two inputs.
 // This is mad cringe ngl. This is only so it WORKS right now.

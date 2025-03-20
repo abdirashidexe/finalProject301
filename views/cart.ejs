@@ -77,6 +77,20 @@
         </ul>
         <% } %>
       </main>
+
+      <aside>
+        <% priceTotal = 0 %>
+        <% for (let i = 0; i < parts.length; i++) { %>
+        <% priceTotal += Number(parts[i].price) %>
+        <p>Item: <%= parts[i].part_name %></p>
+        <p>Price: <%= parts[i].price %></p>
+        <br>
+        <br>
+
+        <% } %>
+        <h2>Total Cost: <%= priceTotal %></h2>
+
+      </aside>
     </div>
   </body>
   <script src="scripts/tocart.js" defer></script>

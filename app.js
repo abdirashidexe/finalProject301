@@ -189,7 +189,6 @@ app.post("/filtered", async (req, res) => {
 
 app.post("/cart", async (req, res) => {
   const { partIds } = req.body;
-  console.log("Received partIds:", partIds);
   const conn = await connect();
   let parts = [];
   try {
@@ -236,14 +235,16 @@ app.post("/cart", async (req, res) => {
 
 // we're only registerin' people who are not logged in.
 // register makes a new account. thats all.
+// Remember to make the products be 0.
+// products need atleast 1 item to merge.
 app.post("/register", async (req, res) => {
   const conn = await connect();
   const { userName, passWord } = req.body;
   const insterQuery = await conn.query(
     `INSERT INTO users 
-        (user_password, username)
-        values (?, ?)`,
-    [passWord, userName]
+        (user_password, username, products_selected)
+        values (?, ?, ?)`,
+    [passWord, userName, 0]
   );
   res.redirect("/");
 });
