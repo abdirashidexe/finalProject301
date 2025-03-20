@@ -7,9 +7,9 @@ Niko & Abdi's final project for SDEV 305.
 - Filters
 - Intuitive rerouting. Logo, empty filters.
 - Validation. Spoofing does not result in anything going through.
-- infinite expandability.
+- Expandability potential is huge
 - Admin Page lists all orders.
-- Shopping carts belong to each individual user. No overlap.
+- Shopping carts belong to each individual user (no overlap)
 
 # limitations
 
