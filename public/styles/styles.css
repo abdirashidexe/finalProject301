@@ -9,18 +9,6 @@ header {
   color: #ecf0f1;
 }
 
-main {
-  grid-area: main;
-}
-
-footer {
-  grid-area: foot;
-}
-
-aside {
-  grid-area: aside;
-}
-
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
