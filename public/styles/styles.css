@@ -8,9 +8,11 @@ header {
   background-color: #b288c0;
   color: #ecf0f1;
   border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 body {
+  background-color: #e8e8f4;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -69,7 +71,7 @@ select {
 }
 
 hr {
-  border: 2px solid rgb(240, 240, 240);
+  border: 2px solid rgb(200, 200, 200);
   border-radius: 5px;
 }
 
@@ -170,7 +172,7 @@ ul {
 
 .logo
 {
-  animation: float 3s ease-in-out infinite;
+  animation: float 6s ease-in-out infinite;
 }
 
 .invisButton {
