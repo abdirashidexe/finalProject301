@@ -2,6 +2,7 @@
 var btnOpen = document.getElementById("myBtn");
 
 var signUp = document.getElementById("signUpChange");
+var signIn = document.getElementById("signInChange");
 
 var modal = document.getElementById("myModal");
 
@@ -32,4 +33,9 @@ window.onclick = function (event) {
 signUp.onclick = function () {
   document.getElementById("login").style.display = "none";
   document.getElementById("signUp").style.display = "block";
+};
+
+signIn.onclick = function () {
+  document.getElementById("signUp").style.display = "none";
+  document.getElementById("login").style.display = "block";
 };
